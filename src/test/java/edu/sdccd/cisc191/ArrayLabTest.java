@@ -2,9 +2,11 @@ package edu.sdccd.cisc191;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ArrayLabTest {
 
     // example arrays for testing
