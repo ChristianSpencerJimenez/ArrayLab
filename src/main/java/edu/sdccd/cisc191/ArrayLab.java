@@ -75,16 +75,14 @@ public class ArrayLab {
      */
     public static int columnSum(int[][] a, int x) {
         int arrayColumnSum = 0;
-            try {
-                for (int i = 0; i < a.length; i++) //This is a for loop that scans the length of the array.
-                {
-                    arrayColumnSum += a[i][x];
-                }
+        for (int i = 0; i < a.length; i++) {
+            for (int j = x; j < x+1; j++) {       //@author Kyle Camposano. How I understand this code, is that x+1 will always be true. However, when ArrayIndexOutOfBoundsException is caught. it will restart the original for loop and continue. testing the next row for column sum.
+                try {
+                    arrayColumnSum += a[i][j];
+                } catch (ArrayIndexOutOfBoundsException e) {}
             }
-            catch (ArrayIndexOutOfBoundsException e) {
-            }
-        return arrayColumnSum;
-        }
+        } return arrayColumnSum;
+    }
 
 
 
@@ -94,10 +92,10 @@ public class ArrayLab {
      * @return calculates the row sum for every row and returns each of the values in an array. Index i of the return array contains the sum of elements in row i.
      */
     public static int[] allRowSums(int[][] a) {
-        int[] rowReturnSum = new int[a.length];
+        int[] rowReturnSum = new int[a.length]; // here i made a new array to store sum data into. its int[a.length] to fix exact size.
         for (int j = 0; j < a.length; j++) {
             for (int i = 0; i < a.length; i++) {
-                rowReturnSum[j] += a[j][i];
+                rowReturnSum[j] += a[j][i];       //for each new iteration of j, row sum is stored within j in the new array.
             }
         }
         return new int[] {rowReturnSum[0], rowReturnSum[1], rowReturnSum[2]};
