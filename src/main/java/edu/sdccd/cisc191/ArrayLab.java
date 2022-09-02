@@ -51,8 +51,6 @@ public class ArrayLab {
         return arrayMaxValue;
     }
 
-
-
     /**
      * @param a 2D array
      * @param x row index
@@ -84,7 +82,6 @@ public class ArrayLab {
                 }
             }
             catch (ArrayIndexOutOfBoundsException e) {
-
             }
         return arrayColumnSum;
         }
