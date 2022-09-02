@@ -11,7 +11,7 @@ public class ArrayLab {
      * @param args command line parameters
      */
     public static void main(String[] args) {
-        int[][] spreadsheet = new int[][] { {1,2,3}, {4,5,6}, {7,8,9} };
+        int[][] spreadsheet = new int[][] { {1,2,3}, {4,5,6}, {7,8,9,4} };
         System.out.println("Max: " + max(spreadsheet));
         System.out.println("Sum of row 0: " + rowSum(spreadsheet,0));
         System.out.println("Sum of col 0: " + columnSum(spreadsheet,0));
@@ -28,20 +28,26 @@ public class ArrayLab {
      * @return the maximum value in the 2d parameter array a
      */
     public static int max(int[][] a) {
-
-        int arrayMaxValue = 0;
-
-        for (int i = 0; i < a.length; i++)   //This for loop scans each possible int i (within array).
-        {
-            for (int j = 0; j < a[i].length; j++) //This for loop scans each possible int j (within array). **I ADDED THE '[i]' after finding out it will not work if there is an extension to the array, ex.{ {1,2,3}, {4,5,6}, {7,8,9,45} }. with this 45 can be found as the max value.**
+        int arrayMaxValue = a[0][0];  //Sets Max to first possible array value. This helps with negative testing.
+        try {
+            for (int i = 0; i < a.length; i++)
             {
-                if (a[i][j] > arrayMaxValue)  //if selected point is greater than existing arrayMaxValue it will run the  int replacing in the body.
+                for (int j = 0; j < a.length; j++)
                 {
-                    arrayMaxValue = a[i][j];
+                    if (a[i][j] > arrayMaxValue)
+                    {
+                        arrayMaxValue = a[i][j];    //if tested array value is above 0 and is larger than the existing max, it is replaced.
+                    }
+                    //Below is when selected array value is < 0. and the greatest negative value is inputted to the value.
+                    else if (a[i][j] < 0){
+                        if (a[i][j] > arrayMaxValue){
+                            a[i][j] = arrayMaxValue;
+                        }
+                    }
                 }
             }
 
-        }
+        }catch (ArrayIndexOutOfBoundsException e){}
         return arrayMaxValue;
     }
 
@@ -53,20 +59,16 @@ public class ArrayLab {
      * @return the sum of the elements in Row x of a
      */
     public static int rowSum(int[][] a, int x) {
-        int arrayRowError = 0;
-        if (x < a.length)
-        {
-            int arrayRowSum = 0;
+        int arrayRowSum = 0;
 
-            for (int i = 0; i < a.length; i++) //This is a for loop that scans the length of the array.
-            {
-                arrayRowSum += a[x][i];
-            }
-            return arrayRowSum;
+
+        for (int i = 0; i < a[x].length; i++) //This is a for loop that scans the length of the array.
+        {
+            arrayRowSum += a[x][i];
         }
-        else
-            return arrayRowError;
+        return arrayRowSum;
     }
+
 
     /**
      * @param a 2D array
@@ -74,18 +76,21 @@ public class ArrayLab {
      * @return the sum of the elements in Column x of a (careful with rows of different lengths!)
      */
     public static int columnSum(int[][] a, int x) {
-        int arrayColumnError = 0;
-        if (x < a.length) {
-            int arrayColumnSum = 0;
-
-            for (int i = 0; i < a.length; i++) //This is a for loop that scans the length of the array.
-            {
-                arrayColumnSum += a[i][x];
+        int arrayColumnSum = 0;
+            try {
+                for (int i = 0; i < a.length; i++) //This is a for loop that scans the length of the array.
+                {
+                    arrayColumnSum += a[i][x];
+                }
             }
-            return arrayColumnSum;
-        } else
-            return arrayColumnError;
-    }
+            catch (ArrayIndexOutOfBoundsException e) {
+
+            }
+        return arrayColumnSum;
+        }
+
+
+
 
     /**
      * @param a 2D array
